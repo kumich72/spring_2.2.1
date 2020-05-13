@@ -1,8 +1,9 @@
 package hiber.model;
 
+import javax.persistence.Entity;
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "User")
 @Table(name = "users")
 public class User {
 
@@ -23,8 +24,12 @@ public class User {
 //   @OneToOne
 //   @JoinColumn(name = "car_id")
 //   @MapsId
-   @OneToOne(cascade = CascadeType.ALL)
-   @JoinColumn(name = "car_id", referencedColumnName = "id")
+//@OneToOne(fetch = FetchType.LAZY)
+//@MapsId
+//   @OneToOne(cascade = CascadeType.ALL)
+//   @JoinColumn(name = "car_id", referencedColumnName = "id")
+@  OneToOne(cascade = CascadeType.ALL)
+   @JoinColumn(name="car_id")
    private Car car;
 
    public User() {}

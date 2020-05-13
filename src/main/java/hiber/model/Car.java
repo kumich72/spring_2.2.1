@@ -2,22 +2,23 @@ package hiber.model;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-
+import javax.persistence.Entity;
 import javax.persistence.*;
 
 
 //@Component
-@Entity
+@Entity(name = "Car")
 @Table (name = "car")
 public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @PrimaryKeyJoinColumn
     //@OneToOne(mappedBy = "preCandidatRejet", cascade = CascadeType.ALL, fetch = FetchType.ALL)
     private Long id;
 
-    @OneToOne(mappedBy = "car")
-    private User user;
+//    @OneToOne(mappedBy = "car")
+//    private User user;
 
     @Column(name = "name")
     String name;
