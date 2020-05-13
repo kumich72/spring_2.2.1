@@ -2,13 +2,14 @@ package hiber.model;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+
 import javax.persistence.Entity;
 import javax.persistence.*;
 
 
 //@Component
 @Entity(name = "Car")
-@Table (name = "car")
+@Table(name = "car")
 public class Car {
 
     @Id
@@ -25,7 +26,8 @@ public class Car {
     @Column(name = "series")
     int series;
 
-    public Car() {}
+    public Car() {
+    }
 
     public Car(String name, int series) {
         this.name = name;

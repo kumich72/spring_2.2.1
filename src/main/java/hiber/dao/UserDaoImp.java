@@ -15,38 +15,37 @@ import java.util.List;
 @Transactional
 public class UserDaoImp implements UserDao {
 
-   @Autowired
-   private SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
-   @Override
-   public void add(User user) {
-      sessionFactory.getCurrentSession().save(user);
-   }
+    @Override
+    public void add(User user) {
+        sessionFactory.getCurrentSession().save(user);
+    }
 
-   @Override
-   @SuppressWarnings("unchecked")
-   public List<User> listUsers() {
-      TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
-      return query.getResultList();
-   }
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<User> listUsers() {
+        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
+        return query.getResultList();
+    }
 
-   @Override
-   @Transactional
-   public User getUserByCarInfo(String nameCar, int seriesCar) {
-      try {
-         //from Cat as cat left join cat.kittens as kitten with kitten.bodyWeight > 10.0
-         Query query = sessionFactory.getCurrentSession().createQuery("FROM User as u left join u.car as c WHERE c.name = :name AND c.series = :series  ");
-         query.setParameter("name", nameCar);
-         query.setParameter("series", seriesCar);
-         List<User> list = query.list();
+    @Override
+    @Transactional
+    public User getUserByCarInfo(String nameCar, int seriesCar) {
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery("FROM User as u left join u.car as c WHERE c.name = :name AND c.series = :series  ");
+            query.setParameter("name", nameCar);
+            query.setParameter("series", seriesCar);
+            List<User> list = query.list();
 
-         if (list.size() == 1) {
-            return list.get(0);
-         }
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      return null;
-   }
+            if (list.size() == 1) {
+                return list.get(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }
